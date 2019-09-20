@@ -7,10 +7,17 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
     # @contact.save
-
-    Contact.create(name: params[:contact][:name], email: params[:contact][:email], content: params[:contact][:content] )
+    if @contact.save(contact_params)
 
     redirect_to "/contacts/new"
-
+    else
+      render 'new'
+    end
   end
+
+  private
+  def contact_params
+   params.require(:contact).permit(:content, :email,:name )
+  end
+
 end
