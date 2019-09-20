@@ -1,4 +1,19 @@
 <%= form_with(model: Contact.new) do |form| %>
+
+  <% if @contact.errors.any? %>
+  <div id= "error_explanation">
+    <h2><%=@contact.error.count %>件エラーがあります。</h2>
+    <ul>
+        <% @contact.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+    </ul>
+  </div>
+<% end %>
+
+  
+
+
   <div class="contact_name">
     <%= form.label :name %>
     <%= form.text_field :name %>
